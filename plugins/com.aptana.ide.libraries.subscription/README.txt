@@ -7,4 +7,4 @@ license.jar
 These are part of edtFTPj/PRO product of Enterprise Distributed Technologies.
 You will need to license and download them from http://www.enterprisedt.com.
 
-The version currently shipped is 3.4.1.
+The version currently shipped is 3.4.1a.
