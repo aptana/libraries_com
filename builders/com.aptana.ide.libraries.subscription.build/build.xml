@@ -79,10 +79,15 @@
 	      target: deploy                      
 	     - - - - - - - - - - - - - - - - - -->
 	<target name="deploy">
+		<!-- wipe deploy directory -->
+		<delete dir="${deploy.dir}" failonerror="false" />
+		<mkdir dir="${deploy.dir}" />
+		<!-- grab final version -->
 		<property file="${buildDirectory}/finalFeaturesVersions.properties" />
 		<propertycopy name="finalVersion" from="${topLevelElementId}" />
+		<!-- copy over result zipfile -->
 		<move file="${buildDirectory}/${buildType}.${build.revision}/${topLevelElementId}-${build.revision}-group.group.group.zip" tofile="${deploy.dir}/${topLevelElementId}-${finalVersion}.zip" />
-		<!-- Extract zipfile! -->
+		<!-- Extract zipped p2 repo too -->
 		<unzip src="${deploy.dir}/${topLevelElementId}-${finalVersion}.zip" dest="${deploy.dir}" />
 	</target>
 
