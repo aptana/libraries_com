@@ -29,11 +29,11 @@
           target: build              
          ================================= -->
 	<target name="build" description="Builds the Studio feature" depends="generate.build.properties,get.revision,replace.versions,generate.base">
-		<delete dir="${buildDirectory}/plugins/com.aptana.ide.update.eclipse34" />
 		<java jar="${baseLocation}/plugins/${launcher.plugin}.jar" fork="true" failonerror="yes">
 			<arg line="-application org.eclipse.ant.core.antRunner -buildfile ${baseLocation}/plugins/${builder.plugin}/scripts/build.xml -Dbuilder=${basedir} -Dbuild.revision=${build.revision} -nosplash" />
 		</java>
-		<antcall target="categorize" />
+
+		<antcall target="deploy" />
 		<antcall target="clean.after" />
 	</target>
 
@@ -51,20 +51,6 @@
 			</propertyset>
 		</echoproperties>
 	</target>
-
-	<!-- ================================= 
-         target: categorize              
-        ================================= -->
-   <target name="categorize" description="categorize the update site">
-   		<java jar="${baseLocation}/plugins/${launcher.plugin}.jar" fork="true" failonerror="yes">
-    		<arg line="-application org.eclipse.equinox.p2.publisher.CategoryPublisher -nosplash -console -consolelog -metadataRepository file:${deploy.dir} -categoryDefinition file:${deploy.dir}/site.xml" />
-    	</java>
-    	<!-- Re-JAR the content.xml file! -->
-    	<jar destfile="${deploy.dir}/content.jar">
-    		<fileset file="${deploy.dir}/content.xml" />
-    	</jar>
-    	<delete file="${deploy.dir}/content.xml" />
-    </target>
 
 	<!-- ================================= 
 	      target: clean              
@@ -87,6 +73,17 @@
 			<arg value="-c" />
 			<arg value="${git.executable} checkout -f" />
 		</exec>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	      target: deploy                      
+	     - - - - - - - - - - - - - - - - - -->
+	<target name="deploy">
+		<property file="${buildDirectory}/finalFeaturesVersions.properties" />
+		<propertycopy name="finalVersion" from="${topLevelElementId}" />
+		<move file="${buildDirectory}/${buildType}.${build.revision}/${topLevelElementId}-${build.revision}-group.group.group.zip" tofile="${deploy.dir}/${topLevelElementId}-${finalVersion}.zip" />
+		<!-- Extract zipfile! -->
+		<unzip src="${deploy.dir}/${topLevelElementId}-${finalVersion}.zip" dest="${deploy.dir}" />
 	</target>
 
 	<!-- - - - - - - - - - - - - - - - - - 
@@ -121,7 +118,6 @@
 			<fileset dir="${vanilla.eclipse}" includes="**/*" defaultexcludes="false" />
 		</copy>
 	</target>
-
 
 	<!-- - - - - - - - - - - - - - - - - - 
           target: get.revision                      
@@ -163,7 +159,7 @@
 	</target>
 
 	<target name="create-artifact-symlink" depends="unlink-symlink">
-		<symlink link="${env.WORKSPACE}/build-artifacts" resource="${deploy.dir}" failonerror="false"/>
+		<symlink link="${env.WORKSPACE}/build-artifacts" resource="${deploy.dir}" failonerror="false" />
 	</target>
 	<target name="unlink-symlink" depends="link.check" if="link.exists">
 		<exec executable="unlink">
@@ -171,6 +167,6 @@
 		</exec>
 	</target>
 	<target name="link.check">
-		<available file="${env.WORKSPACE}/build-artifacts"  property="link.exists"/>
+		<available file="${env.WORKSPACE}/build-artifacts" property="link.exists" />
 	</target>
 </project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/com.aptana.ide.feature.libraries.subscription_2.0.2.1317770565-3-12428881676.jar" id="com.aptana.ide.feature.libraries.subscription" version="2.0.2.1317770565-3-12428881676">
+      <category name="com.aptana.ide.libraries.subscription"/>
+   </feature>
+   <category-def name="com.aptana.ide.libraries.subscription" label="Aptana Studio Subscription Libraries"/>
+</site>
