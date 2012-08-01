@@ -13,9 +13,6 @@
       %copyright
    </copyright>
 
-   <license url="%licenseURL">
-   </license>
-
    <plugin
          id="com.aptana.ide.libraries.subscription"
          download-size="0"
