@@ -31,7 +31,7 @@ configs=win32, win32, x86 & win32, win32, x86_64 & linux, gtk, x86 & linux, gtk,
 
 		// If not a PR, trigger studio3-core build for same branch
 		if (!env.BRANCH_NAME.startsWith('PR-')) {
-			build job: "Studio3/studio3/${env.BRANCH_NAME}", wait: false
+			build job: "Studio/studio3/${env.BRANCH_NAME}", wait: false
 		}
 	} catch (e) {
 		// if any exception occurs, mark the build as failed
