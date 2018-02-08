@@ -1,0 +1,17 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.aptana.ide.libraries.subscription</groupId>
+    <artifactId>com.aptana.ide.libraries.subscription.bundles</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>com.aptana.ide.libraries.subscription</groupId>
+        <artifactId>com.aptana.ide.libraries.subscription.root</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>com.aptana.ide.libraries.subscription</module>
+    </modules>
+</project>

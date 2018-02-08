@@ -3,3 +3,4 @@ plugins/com.aptana.ide.libraries.subscription/edtftpj-license.txt
 plugins/com.aptana.ide.libraries.subscription/edtftpj-pro.jar
 plugins/com.aptana.ide.libraries.subscription/license.jar
 .pmd
+target/
