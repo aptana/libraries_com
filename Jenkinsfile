@@ -1,7 +1,10 @@
 #! groovy
-
-// Keep logs/reports/etc of last 15 builds, only keep build artifacts of last 2 builds
-properties([buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '2'))])
+properties([
+	// Keep logs/reports/etc of last 15 builds, only keep build artifacts of last 2 builds
+	buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '2')),
+	// specify projects to allow to copy artifacts with a comma-separated list.
+	copyArtifactPermission("../studio3/${env.BRANCH_NAME}"),
+])
 
 timestamps {
 	// Need maven 3.3+
