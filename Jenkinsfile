@@ -3,7 +3,7 @@
 properties([
 	buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '2')),
 	// specify projects to allow to copy artifacts with a comma-separated list.
-	copyArtifactPermission("../studio3/${env.BRANCH_NAME}"),
+	copyArtifactPermission("../studio3/*"),
 ])
 
 timestamps {
